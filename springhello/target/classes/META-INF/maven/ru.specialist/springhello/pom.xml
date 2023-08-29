@@ -6,8 +6,8 @@
   
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	<maven.compiler.source>1.8</maven.compiler.source>
-	<maven.compiler.target>1.8</maven.compiler.target>
+	<maven.compiler.source>17</maven.compiler.source>
+	<maven.compiler.target>17</maven.compiler.target>
   </properties>
   
   <dependencies>
@@ -23,10 +23,12 @@
 	    <version>5.3.29</version>
 	</dependency>
 	-->
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
 	<dependency>
 	    <groupId>org.springframework</groupId>
 	    <artifactId>spring-context</artifactId>
-	    <version>5.3.29</version>
+	    <version>6.0.11</version>
 	</dependency>
+
   </dependencies>  
 </project>

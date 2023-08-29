@@ -1,5 +1,6 @@
 # Compiled class file
 .metadata/
+target/
 *.class
 
 # Log file
