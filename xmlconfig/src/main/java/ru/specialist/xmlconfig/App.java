@@ -7,6 +7,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import ru.specialist.building.House;
+import ru.specialist.graph.Circle;
+import ru.specialist.graph.Point;
 
 /* Labs
  * Coords
@@ -41,9 +43,13 @@ public class App {
 			
 			h.buildWalls();
 			h.ventilate();
-		}
+		} //((Closeable)context).close();
 		
-		//((Closeable)context).close();
+		ApplicationContext gc = 
+				new ClassPathXmlApplicationContext("graphConfig.xml");
+		
+		gc.getBean("myPoint", Point.class).draw();
+		gc.getBean("myCircle", Circle.class).draw();		
 		
 		// Scopes
 		// https://docs.spring.io/spring-framework/reference/core/beans/factory-scopes.html
