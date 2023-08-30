@@ -1,5 +1,6 @@
 package ru.specialist.stuff;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -16,9 +17,12 @@ public class AppContext {
 	public Company specialist() {
 		Company s = new Company();
 		s.setTitle("Specialist.ru");
-		s.setStuffs(100);
+		s.setStuffs(size);
 		return s;
 	}
+	
+	@Value("#{yandex.stuffs / 10}") // SpEL
+	private int size;
 
 	@Bean
 	public Company yandex() {

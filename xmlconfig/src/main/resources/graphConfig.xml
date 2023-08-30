@@ -20,7 +20,7 @@
     <bean id="coords" class="ru.specialist.graph.Coords"
        	scope="prototype"/>
        	
-       <bean id="myPoint" class="ru.specialist.graph.Point"
+    <bean id="myPoint" class="ru.specialist.graph.Point"
        	scope="prototype">
        	<constructor-arg ref="coords"/>
        	<property name="color" value="${point.color}"/>
@@ -31,9 +31,22 @@
 	<bean id="myCircle" class="ru.specialist.graph.Circle"
        	scope="prototype">
        	<constructor-arg ref="coords"/>
-       	<constructor-arg value="${circle.radius}"/>
+       	<!-- 
+       	<constructor-arg value="#{T(java.lang.Math).random()*100}"/>
+       	 -->
+       	 <constructor-arg value="#{new java.util.Random().nextInt(100)}"/>
        	<property name="color" value="${circle.color}"/>
        	<property name="x" value="${circle.x}"/>
-       	<property name="y" value="${circle.y}"/>
-       </bean>
+       	<property name="y" value="#{myPoint.y}"/>
+     </bean>
+     
+     <bean id="scene" class="ru.specialist.graph.Scene"
+     	scope="singleton">
+     	<property name="objects">
+     		<list>
+     			<ref bean="myCircle"/>
+     			<ref bean="myPoint"/>
+     		</list>
+     	</property>
+     </bean>
  </beans>

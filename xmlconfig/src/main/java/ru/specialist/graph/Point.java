@@ -30,7 +30,7 @@ public class Point extends Shape {
 	}
 	
 	public void draw() {
-		System.out.printf("Point (%d, %d)Color: %s\n", 
+		System.out.printf("Point (%d, %d) Color: %s\n", 
 				getX(), getY(), getColor());
 		
 	}

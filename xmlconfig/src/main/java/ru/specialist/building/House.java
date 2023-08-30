@@ -1,10 +1,16 @@
 package ru.specialist.building;
 
+import java.util.List;
+import java.util.Map;
+
 public class House {
 	
 	private int height;
 	private Window window;
 	private Material wall;
+	
+	//private List<Door> doors;
+	private Map<String, Door> doors;
 	
 	public House() {}
 	
@@ -26,11 +32,41 @@ public class House {
 			System.out.printf("Floor %d. ", i);
 			getWall().buildUp();
 		}
+	}
+	
+	public void installDoors() {
+		for(Map.Entry<String, Door> e : doors.entrySet()) {
+			System.out.printf("Key : %s. ", e.getKey());
+			e.getValue().install();
+		}
 			
 	}
+	
+	/*public void installDoors() {
+		for(Door door : doors)
+			door.install();
+	}
+	
+	public List<Door> getDoors() {
+		return doors;
+	}
+
+	public void setDoors(List<Door> doors) {
+		this.doors = doors;
+	}*/
+	
+	
 
 	public void setWall(Material wall) {
 		this.wall = wall;
+	}
+
+	public Map<String, Door> getDoors() {
+		return doors;
+	}
+
+	public void setDoors(Map<String, Door> doors) {
+		this.doors = doors;
 	}
 
 	public Window getWindow() {

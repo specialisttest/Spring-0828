@@ -26,7 +26,7 @@ public class Person {
 	public int getAge() {
 		return age;
 	}
-	@Value("45")
+	@Value("#{T(java.lang.Math).random()*10 + 30}")
 	public void setAge(int age) {
 		this.age = age;
 	}

@@ -24,11 +24,11 @@ public class App {
 		System.out.println(p);
 		
 		Company yandex = context.getBean("yandex", Company.class);
-		System.out.printf("Company title: %s\n", yandex.getTitle());
+		System.out.printf("Company title: %s : %d\n", yandex.getTitle(), yandex.getStuffs());
 
 		Company s  = context.getBean("specialist.ru", Company.class);
 		Company s2 = context.getBean("specialist.ru", Company.class);
-		System.out.printf("Company title: %s\n", s.getTitle());
+		System.out.printf("Company title: %s : %d\n\n", s.getTitle(), s.getStuffs());
 		System.out.println( s == s2 );
 		System.out.println( s.hashCode() );
 		System.out.println( s2.hashCode() );
