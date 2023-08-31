@@ -15,7 +15,6 @@ import ru.specialist.graph.Scene;
 /* Labs
  * Coords
  * 	x,y
- * 
  * abstract Shape
  * 	String color
  *  abstract draw()
@@ -24,7 +23,6 @@ import ru.specialist.graph.Scene;
  * 	Coords coords
  *  draw();
  *  setX(), setY()
- * 
  * 
  * Circle extends Shape
  *   Coords center, int radius

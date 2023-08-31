@@ -24,12 +24,17 @@
     <context:property-placeholder location="house.properties"/>
          
 	<bean id="bricks" class="ru.specialist.building.Brick"
-		scope="prototype"/>
+		scope="prototype" primary="true"/>
 	
 	<bean id="logs" class="ru.specialist.building.Wood"
-		scope="prototype"/>
+		scope="prototype" autowire-candidate="false"/>
 	
-	<bean id="woodFrame" class="ru.specialist.building.WoodWindow" lazy-init="true"/>
+	<!-- 
+	<bean id="wall" class="ru.specialist.building.Brick"
+		scope="prototype"/>
+		 -->
+	<bean id="woodFrame" class="ru.specialist.building.WoodWindow" lazy-init="true"
+		primary="true"/>
 	<bean id="plasticFrame" class="ru.specialist.building.PlasticWindow" lazy-init="true"/>
 	
 	<bean id="outDoor" class="ru.specialist.building.MetalDoor" lazy-init="true"/>
@@ -43,12 +48,15 @@
 	</bean>
 	 -->
 	 <bean id="house" class="ru.specialist.building.House" lazy-init="true"
-		 p:wall-ref="logs"
+	     autowire="byType"
 		 init-method="onCreate"
 		 destroy-method="onDestroy"
 		 >
 		 <constructor-arg ref="woodFrame"/>
 		 <constructor-arg value="${house.height}"/>
+		 <!-- 
+		  <constructor-arg name="height" value="${house.height}"/>
+		  -->
 		 <property name="doors">
 		 	<map>
 		 		<entry key="A" value-ref="outDoor"/>
