@@ -2,6 +2,8 @@ package ru.specialist.graph;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 public class Scene {
 	
 	private Scene () {}
@@ -20,6 +22,7 @@ public class Scene {
 		return objects;
 	}
 
+	//@Autowired
 	public void setObjects(List<Shape> objects) {
 		this.objects = objects;
 	}
