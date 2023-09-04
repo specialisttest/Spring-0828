@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreatorFactory;
@@ -14,18 +15,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
-class CourseRowMapper implements RowMapper<Course> {
-
-	@Override
-	public Course mapRow(ResultSet rs, int rowNum) throws SQLException {
-		Course c = new Course();
-		c.setId( rs.getInt("id") );
-		c.setTitle( rs.getString("title") );
-		c.setLength( rs.getInt("length") );
-		c.setDescription( rs.getString("description") );
-		return c;
-	}
-}
 
 public class JdbcCourseDAO implements CourseDAO {
 	
@@ -55,12 +44,15 @@ public class JdbcCourseDAO implements CourseDAO {
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
+	
+	@Autowired
+	private CourseRowMapper courseRowMapper;
 
 	@Override
 	public Course findById(int id) {
 		Course course = getJdbcTemplate().queryForObject(
 			SQL_SELECT_COURSE_BY_ID, new Object[] {id},
-			new CourseRowMapper() );
+			courseRowMapper );
 		
 		return course;
 	}
@@ -84,6 +76,7 @@ public class JdbcCourseDAO implements CourseDAO {
 		
 		List<Course> courses = getJdbcTemplate().query(SQL_SELECT_COURSE,
 				//new CourseRowMapper());
+				//courseRowMapper);
 				new BeanPropertyRowMapper(Course.class));
 		return courses;
 	}
@@ -92,7 +85,8 @@ public class JdbcCourseDAO implements CourseDAO {
 	public List<Course> findByTitle(String title) {
 		return getJdbcTemplate().query(SQL_SELECT_COURSE_BY_TITLE,
 			new Object[] { "%"+title+"%"},
-			new BeanPropertyRowMapper(Course.class));
+			courseRowMapper);
+			//new BeanPropertyRowMapper(Course.class));
 	}
 
 	@Override
