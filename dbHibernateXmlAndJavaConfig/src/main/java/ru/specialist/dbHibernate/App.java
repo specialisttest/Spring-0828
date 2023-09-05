@@ -1,26 +1,29 @@
 package ru.specialist.dbHibernate;
 
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import ru.specialist.DAO.Course;
 import ru.specialist.DAO.CourseDAO;
+import ru.specialist.DAO.DaoConfig;
 
 public class App 
 {
     public static void main( String[] args )
     {
-    	ClassPathXmlApplicationContext context = 
-				new ClassPathXmlApplicationContext("applicationContext.xml");
+    	//ClassPathXmlApplicationContext context = 
+		//		new ClassPathXmlApplicationContext("applicationContext.xml");
+    	AnnotationConfigApplicationContext context = 
+    			new AnnotationConfigApplicationContext (DaoConfig.class);
 		
 		CourseDAO courseDao = context.getBean(CourseDAO.class);
 		
-		/*
-		Course spring = new Course();
+		/*Course spring = new Course();
 		spring.setTitle("Spring");
 		spring.setLength(40);
 		spring.setDescription("Spring framework");
-		courseDao.insert(spring);*/
-		
+		courseDao.insert(spring);
+		*/
 		//courseDao.delete(8);
 		
 		

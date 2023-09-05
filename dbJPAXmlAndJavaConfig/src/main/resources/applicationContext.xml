@@ -24,27 +24,36 @@
 			p:password="${jdbc.password}"/>
 	<context:property-placeholder
 		location="classpath:jdbc.properties"/>
-		
-	<tx:annotation-driven/>
-	<context:component-scan base-package="ru.specialist.DAO"/>
+
 	<util:properties id="hibernateProperties">
 		<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
 		<prop key="hibernate.max_fetch_depth">3</prop>
-		<prop key="hibernate.jdbc.fetch_size">50</prop>
-		<prop key="hibernate.jdbc.batch_size">10</prop>
+		<prop key="hibernate.max_fetch_size">50</prop>
+		<prop key="hibernate.max_batch_size">10</prop>
 		<prop key="hibernate.show_sql">false</prop>
-	</util:properties> 		 
-		 
-	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean"
-		p:dataSource-ref="webDataSource"
-		p:packagesToScan="ru.specialist.DAO"
-		p:hibernateProperties-ref="hibernateProperties"/>
+	</util:properties>
+
+	<bean id="emf"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="webDataSource" />
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+		</property>
+		<property name="packagesToScan" value="ru.specialist.DAO"/> 
+		<property name="jpaProperties" ref="hibernateProperties"/>
+	</bean> 
+	
+	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+	
 	
 	<bean id="transactionManager"
-		class="org.springframework.orm.hibernate5.HibernateTransactionManager"
-		p:sessionFactory-ref="sessionFactory"/>
-		
-	 
+		class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="emf"/>
+	</bean>
 	
+	
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+	<context:component-scan base-package="ru.specialist.dao"/>
+		 
 </beans>
