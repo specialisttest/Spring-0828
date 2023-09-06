@@ -1,6 +1,7 @@
 package ru.specialist.dao;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -11,12 +12,18 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.EnableCaching;
 //import org.springframework.dao.ConcurrencyFailureException;
 import org.springframework.cache.annotation.CachePut;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionManager;
+import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.reactive.TransactionalOperator;
+import org.springframework.transaction.support.TransactionTemplate;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -30,6 +37,15 @@ public class JPACourseDAO implements CourseDAO {
 	@PersistenceContext
 	private EntityManager em;
 	
+	
+	//private TransactionManager tm;
+	private TransactionTemplate tt;
+	
+	@Autowired
+	public JPACourseDAO(PlatformTransactionManager tm) {
+		tt = new TransactionTemplate(tm);
+	}
+	
 	@Override
 	@Transactional( readOnly = true)
 	//@Cacheable(value = courses", key="#parameter_name")
@@ -42,6 +58,21 @@ public class JPACourseDAO implements CourseDAO {
 		
 		return query.getSingleResult();*/
 	}
+	
+	public void TestTransaction() {
+		//TransactionalOperator op =TransactionalOperator.create(transactionManager) 
+		
+		//this.tt.setIsolationLevel(0);
+		//this.tt.setTimeout(30);
+		this.tt.executeWithoutResult( new Consumer<TransactionStatus>() {
+			@Override
+			public void accept(TransactionStatus t) {
+				
+				
+			}
+		});
+	}
+	
 
 	@Override
 	@Transactional( readOnly = false)

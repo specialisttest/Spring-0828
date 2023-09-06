@@ -12,6 +12,13 @@ public class ReportServiceImpl implements ReportService {
 	@Autowired
 	private CourseRepository courseDao;
 	
+	double average(int... m) {
+		int summa = 0;
+		for(int i =0; i < m.length; i++)
+			summa += m[i];
+		return (double)summa / m.length;
+	}
+	
 	// O(n^2)
 	double mediana(int... m) {
 		Arrays.sort(m);
@@ -26,6 +33,13 @@ public class ReportServiceImpl implements ReportService {
 		int[] m = courseDao.findAll().stream()
 					.mapToInt(c->c.getLength()).toArray();
 		return mediana(m);
+	}
+
+	@Override
+	public double getAverageCourseLength() {
+		int[] m = courseDao.findAll().stream()
+				.mapToInt(c->c.getLength()).toArray();
+		return average(m);
 	}
 
 }

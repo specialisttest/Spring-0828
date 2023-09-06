@@ -4,10 +4,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-public interface CourseRepositoryCustomized<T> {
+public interface CourseRepositoryCustomized {
 	
 	//int getCourseMaxLength();
-	//void delete(Course entity);
 	List<Course> findByTitle(String title);
 
 }

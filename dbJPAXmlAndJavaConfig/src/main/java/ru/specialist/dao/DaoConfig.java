@@ -22,6 +22,7 @@ import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -64,7 +65,7 @@ public class DaoConfig {
 	}
 	
 	@Bean
-	public TransactionManager transactionManager() {
+	public PlatformTransactionManager transactionManager() {
 		return new JpaTransactionManager(emf().getObject());
 	}
 	

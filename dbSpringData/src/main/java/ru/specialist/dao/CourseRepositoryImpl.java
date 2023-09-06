@@ -10,24 +10,20 @@ import org.springframework.transaction.annotation.Transactional;
 
 // SUFFIX: Impl !!! (by default)
 // className == Original_repository_interface_name + Impl
-public class CourseRepositoryImpl implements CourseRepositoryCustomized<Course> {
+public class CourseRepositoryImpl implements CourseRepositoryCustomized {
 
 	@PersistenceContext
 	private EntityManager em; 
 	
+	@Transactional(readOnly = true)
 	@Override
 	public List<Course> findByTitle(String title) {
 		return 
 		em.createQuery("SELECT c FROM Course c WHERE c.title LIKE :search", Course.class)
-		   .setParameter("search", "%"+title+"%")
+		   .setParameter("search", "%"+title.trim()+"%")
 		   .getResultList();
 	}
-	/*
-	@Transactional
-	@Override 
-	public void delete(Course entity) {
-		// custmozied opertaion instead CrudRepository
-	}*/
+
 	
 
 }
