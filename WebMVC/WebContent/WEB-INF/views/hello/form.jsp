@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Hello page</title>
 <style>
 	form fieldset {
 		width : 40%;

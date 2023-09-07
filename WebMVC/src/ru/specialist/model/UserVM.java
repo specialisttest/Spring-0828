@@ -12,7 +12,7 @@ import ru.specialist.service.HelloService;
 @Component("userVM")
 public class UserVM {
 	
-	// Properties: userName, hello
+	// Properties: userName, hello (read only)
 	
 	private String userName;
 	public String getUserName() {
@@ -24,15 +24,20 @@ public class UserVM {
 	
 	/*public String getHello() {
 		
+		return (getUserName() == null || getUserName().isEmpty()) ? "Привет!" : 
+			String.format("Привет, %s!", getUserName());
+	}*/	
+	
+	public String getHello() {
 		return (getUserName() == null || getUserName().isEmpty()) ? 
 				helloService.getHello()+"!" : 
 				String.format("%s, %s!", helloService.getHello(), getUserName());
 	}
 	
 	@Autowired
-	private HelloService helloService;*/
+	private HelloService helloService;
 	
-	
+	/*
 	@Autowired
 	private MessageSource messageSource;
 	public MessageSource getMessageSource() {
@@ -54,7 +59,7 @@ public class UserVM {
 			getMessageSource().getMessage("header_hello_username", 
 					new Object[] {getUserName()}, Locale.getDefault()));
 		
-	}
+	}*/
 	
 
 }
