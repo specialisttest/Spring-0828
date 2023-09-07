@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:s="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/security
+    http://www.springframework.org/schema/security/spring-security.xsd">
+    
+    <s:http use-expressions="true">
+    	<s:intercept-url pattern="/*" access="permitAll"/>
+    	<s:form-login login-page="/courses/"
+    		authentication-failure-url="/security/loginfail"
+    		default-target-url="/courses/"/>
+    	<s:logout logout-success-url="/courses/"/>
+    </s:http>
+    
+    <s:authentication-manager>
+		<s:authentication-provider user-service-ref="MyUserDetailService">
+
+    			    		<!-- 
+    		<s:user-service>
+    			<s:user name="user" password="1234" authorities="ROLE_USER"/>
+    			<s:user name="user2" password="1234" authorities="ROLE_GUEST"/>
+    		</s:user-service>
+    		<s:jdbc-user-service data-source-ref="webDataSource"
+    			users-by-username-query=" select username, password, enabled
+    				from users where username = ?"
+    			authorities-by-username-query="select username, 
+    				rolename AS authority from
+    				users  INNER JOIN roles ON  users.role_id = roles.id 
+    			"/>
+			    		<s:password-encoder hash="sha"/>
+
+    			
+    		
+    		 -->
+    		
+    		
+    	</s:authentication-provider>
+    </s:authentication-manager>
+    
+</beans>
