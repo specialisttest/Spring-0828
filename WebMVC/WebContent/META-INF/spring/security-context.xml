@@ -24,13 +24,13 @@
     			<s:user name="user2" password="1234" authorities="ROLE_GUEST"/>
     		</s:user-service>
     		<s:jdbc-user-service data-source-ref="webDataSource"
-    			users-by-username-query=" select username, password, enabled
+    			users-by-username-query="select username, password, enabled
     				from users where username = ?"
     			authorities-by-username-query="select username, 
     				rolename AS authority from
     				users  INNER JOIN roles ON  users.role_id = roles.id 
     			"/>
-			    		<s:password-encoder hash="sha"/>
+			    <s:password-encoder hash="sha"/>
 
     			
     		

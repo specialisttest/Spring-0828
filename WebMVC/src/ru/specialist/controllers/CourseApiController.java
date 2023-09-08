@@ -31,7 +31,7 @@ public class CourseApiController {
 		return courseService.findAll();
 	}
 	
-	@RequestMapping(value="/{id}", method = RequestMethod.GET) // api/course/5
+	@RequestMapping(value="/{id}", method = RequestMethod.GET) // api/course/5 GET
 	//@ResponseBody
 	public Course findById(@PathVariable int id) {
 		return courseService.findById(id);
